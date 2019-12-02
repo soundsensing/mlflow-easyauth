@@ -10,7 +10,7 @@ events {
 http {
 
     server {
-        listen 80;
+        listen ${PORT};
         server_name localhost;
 
         # HTTP Basic auth
