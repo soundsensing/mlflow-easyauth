@@ -14,60 +14,81 @@ Pull requests are welcome to fix any compatibility issues.
 
 ## Status
 
-**Not working yet**
+**Prototype**
 
-## TODO
-
-
-- Allow passing Google Cloud credentials as envvar
-- Test with Google Cloud bucket 
-
-- Test Heroku button
-- Finish README file
-- Write blogpost announcement
-- Advertise solution on relevant channels
-https://github.com/mlflow/mlflow/issues/9 ?
-https://stackoverflow.com/questions/58956459/how-to-run-authentication-on-a-mlflow-server
-
-
-apache-tools
-sudo htpasswd -c /etc/nginx/.htpasswd nginx
-
-## Devloping
-```
-
-docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/webserver.sh
-
-```
-
-## Settings
-MLFLOW_TRACKING_USERNAME=foo
-MLFLOW_TRACKING_PASSWORD=
-
-export GOOGLE_APPLICATION_CREDENTIALS_JSON=`cat foo-fa31bc1bbb1d.json`
-
-//export GOOGLE_APPLICATION_CREDENTIALS=soundquality-fa31bc1bbb1d.json
-export ARTIFACT_URL=gs://soundquality-mlflow/test1
-export DATABASE_URL=postgresql://mlflow_test:pass@localhost
-
-mlflow server --backend-store-uri $DATABASE_URL --default-artifact-root $ARTIFACT_URL
+# Quickstart
 
 ## Deploying to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+This will provision an Heroku app, and
+
+## Use as
+
+    export MLFLOW_TRACKING_URI=http://176.58.97.239:5000
+    export MLFLOW_TRACKING_USERNAME=user
+    export MLFLOW_TRACKING_PASSWORD=user
+
+    mlflow experiments create -n test6
+
+    export MLFLOW_EXPERIMENT_NAME=test5
+
+## Enable artifact persistence
+
+Using Google Cloud Storage.
+
+Configure Heroku server
+
+    heroku config:set ARTIFACT_URL=gs://MY-BUCKET/SOME/FOLDER
+    heroku config:set GOOGLE_APPLICATION_CREDENTIALS_JSON=`cat foo-fa31bc1bbb1d.json`
+
+Configure the mlflow client
+
+    export GOOGLE_APPLICATION_CREDENTIALS=credentials.json
+
+
+# Reference
+
 
 ## Deploying with Docker
 
-... TODO
+Clone this git repo
 
-## On the client
+```
+
+```
+
+Build the image
+
+```
+docker build -t my-mlflow-easyauth:latest .
+
+```
+
+Create a .env file with settings
 
 
-    export MLFLOW_TRACKING_URI=http://176.58.97.239:5000
-    export MLFLOW_TRACKING_TOKEN=token
-    
-    export GOOGLE_APPLICATION_CREDENTIALS=soundquality-fa31bc1bbb1d.json
-    export MLFLOW_EXPERIMENT_NAME=test5
+Run it
 
-    experiments create -n test6
+```
+docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
+```
+
+## Settings
+
+
+```
+MLFLOW_TRACKING_USERNAME=
+MLFLOW_TRACKING_PASSWORD=
+GOOGLE_APPLICATION_CREDENTIALS=
+ARTIFACT_URL=
+DATABASE_URL=
+```
+
+# Developing
+```
+
+docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
+
+```
