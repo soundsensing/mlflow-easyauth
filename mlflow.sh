@@ -14,4 +14,17 @@ fi
 # Fix naming convention mismatch between Heroku and mlflow
 DATABASE_URL=${DATABASE_URL//postgres:/postgresql:} 
 
+# Credentials for Google Cloud Storage
+if [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+    export GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+fi
+
+if [[ -z "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" ]]; then
+    echo ""
+else
+    echo ${GOOGLE_APPLICATION_CREDENTIALS_JSON} > ${GOOGLE_APPLICATION_CREDENTIALS}
+    echo "Wrote to ${GOOGLE_APPLICATION_CREDENTIALS}"
+fi
+
+
 exec mlflow server --backend-store-uri=$DATABASE_URL --default-artifact-root=$ARTIFACT_URL

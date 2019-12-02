@@ -19,9 +19,7 @@ Pull requests are welcome to fix any compatibility issues.
 ## TODO
 
 
-- Test with PostgresSQL
-
-- Allow passing Google Cloud credentials as envvar (base64?)
+- Allow passing Google Cloud credentials as envvar
 - Test with Google Cloud bucket 
 
 - Test Heroku button
@@ -43,12 +41,12 @@ docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env
 ```
 
 ## Settings
-MLFLOW_TRACKING_TOKEN=foo
-MLFLOW_WEB_USERNAME=
-MLFLOW_WEB_PASSWORD
+MLFLOW_TRACKING_USERNAME=foo
+MLFLOW_TRACKING_PASSWORD=
 
+export GOOGLE_APPLICATION_CREDENTIALS_JSON=`cat foo-fa31bc1bbb1d.json`
 
-export GOOGLE_APPLICATION_CREDENTIALS=soundquality-fa31bc1bbb1d.json
+//export GOOGLE_APPLICATION_CREDENTIALS=soundquality-fa31bc1bbb1d.json
 export ARTIFACT_URL=gs://soundquality-mlflow/test1
 export DATABASE_URL=postgresql://mlflow_test:pass@localhost
 
