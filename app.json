@@ -1,0 +1,30 @@
+{
+  "name": "mlflow-easyauth",
+  "description": "Mlflow tracking server with simple authentication",
+  "keywords": [
+    "machine learning",
+    "machinelearning",
+    "mlflow",
+    "experiment tracking"
+  ],
+  "repository": "https://github.com/jane-doe/small-sharp-tool",
+  "success_url": "/welcome",
+  "scripts": {
+    "postdeploy": "bundle exec rake bootstrap"
+  },
+  "env": {
+    "MLFLOW_TRACKING_PASSWORD": {
+      "description": "Password for mlflow web dashboard and HTTP API",
+      "generator": "secret"
+    },
+    "MLFLOW_TRACKING_USERNAME": {
+      "description": "Username for mlflow web dashboard and HTTP API",
+      "value": "user"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+    }
+  ]
+}
