@@ -4,7 +4,7 @@ FROM debian:buster-slim
 RUN set -x \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
-    python3 python3-pip python3-setuptools python3-pandas supervisor nginx \
+    python3 python3-pip python3-setuptools python3-pandas supervisor nginx apache2-utils \
     && pip3 install wheel \
     && pip3 install google-cloud-storage mlflow \
     && apt-get remove --purge --auto-remove -y ca-certificates && rm -rf /var/lib/apt/lists/*

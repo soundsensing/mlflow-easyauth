@@ -18,11 +18,10 @@ Pull requests are welcome to fix any compatibility issues.
 
 ## TODO
 
-- Test tracking locally
-- Add basic auth in nginx
 - Try deploy on Heroku
-- Ensure HTTP web auth works
-- Ensure HTTP API auth works
+
+
+- Test with PostgresSQL
 
 - Allow passing Google Cloud credentials as envvar (base64?)
 - Test with Google Cloud bucket 
@@ -37,6 +36,13 @@ https://stackoverflow.com/questions/58956459/how-to-run-authentication-on-a-mlfl
 
 apache-tools
 sudo htpasswd -c /etc/nginx/.htpasswd nginx
+
+## Devloping
+```
+
+docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/webserver.sh
+
+```
 
 ## Settings
 MLFLOW_TRACKING_TOKEN=foo
