@@ -7,12 +7,12 @@
     "mlflow",
     "experiment tracking"
   ],
-  "repository": "https://github.com/jane-doe/small-sharp-tool",
+  "repository": "https://github.com/soundsensing/mlflow-easyauth",
   "stack": "container",
   "env": {
     "MLFLOW_TRACKING_PASSWORD": {
       "description": "Password for mlflow web dashboard and HTTP API",
-      "generator": "secret"
+      "value": "PASSWORD"
     },
     "MLFLOW_TRACKING_USERNAME": {
       "description": "Username for mlflow web dashboard and HTTP API",
