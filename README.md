@@ -18,15 +18,13 @@ Pull requests are welcome to fix any compatibility issues.
 
 ## TODO
 
-- Try deploy on Heroku
-
 
 - Test with PostgresSQL
 
 - Allow passing Google Cloud credentials as envvar (base64?)
 - Test with Google Cloud bucket 
 
-- Add Heroku button
+- Test Heroku button
 - Finish README file
 - Write blogpost announcement
 - Advertise solution on relevant channels
@@ -58,7 +56,8 @@ mlflow server --backend-store-uri $DATABASE_URL --default-artifact-root $ARTIFAC
 
 ## Deploying to Heroku
 
-... TODO
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 
 ## Deploying with Docker
 
