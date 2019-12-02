@@ -8,6 +8,7 @@
     "experiment tracking"
   ],
   "repository": "https://github.com/jane-doe/small-sharp-tool",
+  "stack": "container",
   "env": {
     "MLFLOW_TRACKING_PASSWORD": {
       "description": "Password for mlflow web dashboard and HTTP API",
