@@ -22,41 +22,68 @@ Pull requests are welcome to fix any compatibility issues.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-This will provision an Heroku app, and
+This will provision an Heroku app, and a Postgres add-on for persisting metrics etc.
+Artifact store needs to be configured separately, see below.
 
-## Use as
+## Use in mflow client
 
-    export MLFLOW_TRACKING_URI=http://176.58.97.239:5000
+Assuming that you have [mlflow tracking integration](https://www.mlflow.org/docs/latest/quickstart.html#using-the-tracking-api) set up already.
+
+Configure the client
+
+    export MLFLOW_TRACKING_URI=http://my-mlflow-instance.herokuapp.com
     export MLFLOW_TRACKING_USERNAME=user
     export MLFLOW_TRACKING_PASSWORD=user
 
-    mlflow experiments create -n test6
+Create a new experiment
 
-    export MLFLOW_EXPERIMENT_NAME=test5
+    mlflow experiments create -n test6
+    export MLFLOW_EXPERIMENT_NAME=test6
+
+Run your
+
+    python3 my-training-script.py
+
+Open the web browser at your newly deployed Heroku app.
+You should now have runs tracked with metrics being logged.
 
 ## Enable artifact persistence
 
-Using Google Cloud Storage.
+Using [Google Cloud Storage](https://cloud.google.com/storage/).
 
-Configure Heroku server
+Create a new or find an existing Google Cloud Storage bucket.
+
+Create a Service Account for API credentials. Download the credentials JSON file.
+
+Add the Service Account to Permissions on the bucket.
+It needs to have the following roles:
+```
+Storage Legacy Bucket Writer
+Legacy Bucket Reader
+Legacy Object Reader
+```
+
+Add the config to the backend on Heroku
 
     heroku config:set ARTIFACT_URL=gs://MY-BUCKET/SOME/FOLDER
-    heroku config:set GOOGLE_APPLICATION_CREDENTIALS_JSON=`cat foo-fa31bc1bbb1d.json`
+    heroku config:set GOOGLE_APPLICATION_CREDENTIALS_JSON="`cat serviceaccount-fa31bc1bbb1d.json`"
 
 Configure the mlflow client
 
     export GOOGLE_APPLICATION_CREDENTIALS=credentials.json
 
+Note that artifact URL is per experiment, so after this you'd need to create a new experiment
+to have it go to your GCS bucket.
 
-# Reference
 
+# Deploying with Docker
 
-## Deploying with Docker
 
 Clone this git repo
 
 ```
-
+git clone https://github.com/soundsensing/mlflow-easyauth.git
+cd mlflow-easyauth.git
 ```
 
 Build the image
@@ -68,6 +95,17 @@ docker build -t my-mlflow-easyauth:latest .
 
 Create a .env file with settings
 
+```bash
+cat <<EOT >> settings.env
+MLFLOW_TRACKING_USERNAME=user
+MLFLOW_TRACKING_PASSWORD=pass
+GOOGLE_APPLICATION_CREDENTIALS_JSON=None
+ARTIFACT_URL=mlruns
+DATABASE_URL=mlruns
+EOT
+"
+```
+
 
 Run it
 
@@ -75,20 +113,8 @@ Run it
 docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
 ```
 
-## Settings
-
-
-```
-MLFLOW_TRACKING_USERNAME=
-MLFLOW_TRACKING_PASSWORD=
-GOOGLE_APPLICATION_CREDENTIALS=
-ARTIFACT_URL=
-DATABASE_URL=
-```
 
 # Developing
 ```
-
 docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
-
 ```
