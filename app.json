@@ -8,10 +8,6 @@
     "experiment tracking"
   ],
   "repository": "https://github.com/jane-doe/small-sharp-tool",
-  "success_url": "/welcome",
-  "scripts": {
-    "postdeploy": "bundle exec rake bootstrap"
-  },
   "env": {
     "MLFLOW_TRACKING_PASSWORD": {
       "description": "Password for mlflow web dashboard and HTTP API",
@@ -24,7 +20,7 @@
   },
   "addons": [
     {
-      "plan": "heroku-postgresql",
+      "plan": "heroku-postgresql"
     }
   ]
 }
