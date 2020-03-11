@@ -31,7 +31,7 @@ Assuming that you have [mlflow tracking integration](https://www.mlflow.org/docs
 
 Configure the client
 
-    export MLFLOW_TRACKING_URI=http://my-mlflow-instance.herokuapp.com
+    export MLFLOW_TRACKING_URI=https://my-mlflow-instance.herokuapp.com
     export MLFLOW_TRACKING_USERNAME=user
     export MLFLOW_TRACKING_PASSWORD=user
 
