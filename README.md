@@ -14,7 +14,7 @@ Pull requests are welcome to fix any compatibility issues.
 
 ## Status
 
-**Prototype**
+**In Use**
 
 # Quickstart
 
@@ -24,6 +24,7 @@ Pull requests are welcome to fix any compatibility issues.
 
 This will provision an Heroku app, and a Postgres add-on for persisting metrics etc.
 Artifact store needs to be configured separately, see below.
+
 
 ## Use in mflow client
 
@@ -121,3 +122,15 @@ This command re-runs all the steps needed to build and run a new version
 ```
 docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
 ```
+
+# Tips & Tricks
+
+## Waking up free Heroku dynos
+
+If you are using Heroku Free dynos, they will go to sleep after inactivity,
+and then wake up again.
+Thus when the mlflow client connects the app may be sleeping,
+causing a the communication timeout and failing the ML pipeline.
+If using this in automated workflows, it may be smart to wakeup the server
+a bit in advance by making an HTTP request to it.
+For example before installing dependencies of the project, etc.
