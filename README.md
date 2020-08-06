@@ -42,7 +42,7 @@ Create a new experiment
 
 Run your
 
-    python3 my-training-script.py
+    python3 example.py
 
 Open the web browser at your newly deployed Heroku app.
 You should now have runs tracked with metrics being logged.
@@ -115,6 +115,9 @@ docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
 
 
 # Developing
+
+This command re-runs all the steps needed to build and run a new version
+
 ```
 docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
 ```
