@@ -120,7 +120,7 @@ docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
 This command re-runs all the steps needed to build and run a new version
 
 ```
-docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:80  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
+docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:6000  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
 ```
 
 # Tips & Tricks
