@@ -2,7 +2,7 @@
 
 
 if [[ -z "${ARTIFACT_URL}" ]]; then
-    export ARTIFACT_URL="mlruns"
+    export ARTIFACT_URL="./mlruns"
 fi
 
 if [[ -z "${DATABASE_URL}" ]]; then
@@ -25,4 +25,10 @@ else
 fi
 
 
-exec mlflow ui --backend-store-uri=$DATABASE_URL --artifacts-destination=$ARTIFACT_URL
+exec mlflow ui \
+    --backend-store-uri=$DATABASE_URL
+    --serve-artifacts \
+    --artifacts-destination=$ARTIFACT_URL \
+    --default-artifact-root=$ARTIFACT_URL
+ 
+
