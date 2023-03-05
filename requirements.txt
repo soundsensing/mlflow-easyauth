@@ -1,2 +1,2 @@
-google-cloud-storage==1.26.0
+google-cloud-storage==2.7.0
 mlflow==2.2.1
