@@ -1,7 +1,5 @@
 #!/bin/bash -x
 
-# FIXME: write google credentials to disk from envvar
-
 
 if [[ -z "${ARTIFACT_URL}" ]]; then
     export ARTIFACT_URL="mlruns"
@@ -27,4 +25,4 @@ else
 fi
 
 
-exec mlflow ui --backend-store-uri=$DATABASE_URL --default-artifact-root=$ARTIFACT_URL
+exec mlflow ui --backend-store-uri=$DATABASE_URL --artifacts-destination=$ARTIFACT_URL
