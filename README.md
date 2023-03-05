@@ -24,13 +24,13 @@ Clone this git repo
 
 ```
 git clone https://github.com/soundsensing/mlflow-easyauth.git
-cd mlflow-easyauth.git
+cd mlflow-easyauth
 ```
 
 Build the image
 
 ```
-docker build -t my-mlflow-easyauth:latest .
+docker build -t mlflow-easyauth:latest .
 
 ```
 
@@ -47,11 +47,16 @@ EOT
 "
 ```
 
+Create a Docker volume for persistence
+
+```
+docker volume create my-mlflow-server-volume
+```
 
 Run it
 
 ```
-docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
+docker run -it -p 8001:6000 --mount source=my-mlflow-server-volume,target=/mlruns --env-file=settings.env mlflow-easyauth:latest
 ```
 
 ## Use in mlflow client
