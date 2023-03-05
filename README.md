@@ -18,7 +18,7 @@ Pull requests are welcome to fix any compatibility issues.
 
 # Quickstart
 
-# Deploying with Docker
+## Run with Docker
 
 Clone this git repo
 
@@ -41,8 +41,8 @@ cat <<EOT >> settings.env
 MLFLOW_TRACKING_USERNAME=user
 MLFLOW_TRACKING_PASSWORD=pass
 #GOOGLE_APPLICATION_CREDENTIALS_JSON=None
-ARTIFACT_URL=mlruns
-DATABASE_URL=mlruns
+#ARTIFACT_URL=mlruns
+#DATABASE_URL=mlruns
 EOT
 "
 ```
@@ -54,25 +54,38 @@ Run it
 docker run -it -p 8001:6000  --env-file=settings.env my-mlflow-easyauth:latest
 ```
 
-## Use in mflow client
-
-Assuming that you have
-[mlflow tracking integration](https://www.mlflow.org/docs/latest/quickstart.html#using-the-tracking-api)
-set up already.
+## Use in mlflow client
 
 Configure the client
 
-    export MLFLOW_TRACKING_URI=https://my-mlflow-instance.herokuapp.com
+    export MLFLOW_TRACKING_URI=http://localhost:8001
     export MLFLOW_TRACKING_USERNAME=user
     export MLFLOW_TRACKING_PASSWORD=pass
 
-Run your code. There is an example included in this repo
+Run some code using the mlflow tracking API. There is an example included in this repo
 
     export MLFLOW_EXPERIMENT_NAME=test6
     python3 example.py
 
 Open the web browser and go to your deployed .
 You should now have runs tracked with metrics being logged.
+
+For more details see official documentation on
+[mlflow tracking integration](https://www.mlflow.org/docs/latest/quickstart.html#using-the-tracking-api).
+
+# Configuration options
+
+All configuration is done as environment variables.
+Set them using the preferred method for your Docker host.
+
+## Using PostgreSQL for metrics persistence
+
+Setup PostgeSQL in your preferred way.
+
+Configure the host and credentials using `DATABASE_URL`
+```
+DATABASE_URL=postgres://user:pass@host:port/path
+```
 
 ## Using Google Cloud Storage for artifact persistence
 
@@ -92,13 +105,15 @@ Legacy Object Reader
 
 Modify configuration to
 
-    ARTIFACT_URL=gs://MY-BUCKET/SOME/FOLDER
-    GOOGLE_APPLICATION_CREDENTIALS_JSON="`cat serviceaccount-fa31bc1bbb1d.json`"
-
+```
+ARTIFACT_URL=gs://MY-BUCKET/SOME/FOLDER
+GOOGLE_APPLICATION_CREDENTIALS_JSON="`cat serviceaccount-fa31bc1bbb1d.json`"
+```
 
 # Developing
 
-This command re-runs all the steps needed to build and run a new version
+This command re-runs all the steps needed to build and run a new version.
+It is useful when iterating on the Docker files.
 
 ```
 docker build -t mlflow-easytracking:latest . && docker run -it -p 8001:6000  --env-file=`pwd`/dev.env    mlflow-easytracking:latest bash /app/entry-point.sh
