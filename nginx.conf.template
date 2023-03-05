@@ -14,6 +14,7 @@ http {
     server {
         listen ${PORT};
         server_name localhost;
+        client_max_body_size 20m;
 
         # HTTP Basic auth
         auth_basic "Login required";
