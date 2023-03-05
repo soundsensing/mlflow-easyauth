@@ -27,4 +27,4 @@ else
 fi
 
 
-exec mlflow server --backend-store-uri=$DATABASE_URL --default-artifact-root=$ARTIFACT_URL
+exec mlflow ui --backend-store-uri=$DATABASE_URL --default-artifact-root=$ARTIFACT_URL
