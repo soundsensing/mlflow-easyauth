@@ -5,12 +5,18 @@ Standard [mlflow](https://mlflow.org/) does not have any authentication for the 
 This project adds basic HTTP authentication with a single username, password to the web interface and API.
 And packages this up in a easy-to-install Docker image.
 
-It can be used with just a Docker volume for persistence,
-or using Google Cloud Storage as the artifact store,
+The simplest configuration uses just a Docker volume for persistence.
+Alternatively one can configure Google Cloud Storage as the artifact store,
 and Heroku Postgres as the tracking store.
-It should be easy to make work on other Docker providers,
+
+It should be easy to deploy to most Docker providers,
+such as Dokku, Fly.io, Heroku, Amazon ECS, Docker Cloud Run, DigitalOcean App Platform, et.c.
+
 with other supported mlflow backends for artifacts and database.
 Pull requests are welcome to fix any compatibility issues.
+
+## License
+[Licensed](./LICENSE.txt) under Apache 2.0, as mlflow itself.
 
 ## Status
 
