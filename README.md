@@ -1,8 +1,14 @@
 
 # mlflow with basic auth
 
-Standard [mlflow](https://mlflow.org/) does not have any authentication for the web-interface.
-This project adds basic HTTP authentication with a single username, password to the web interface and API.
+**UPDATE: Standard mlflow supports authentication since 2023.**
+Consider using that instead of this project.
+See the official documentation at https://mlflow.org/docs/latest/auth/index.html
+
+## This project
+
+[mlflow](https://mlflow.org/) before version 2.5.0 (July 2023) did have any authentication for the web-interface.
+This project adds basic HTTP authentication with a **single username, password** to the web interface and API.
 And packages this up in a easy-to-install Docker image.
 
 The simplest configuration uses just a Docker volume for persistence.
@@ -12,15 +18,18 @@ and Heroku Postgres as the tracking store.
 It should be easy to deploy to most Docker providers,
 such as Dokku, Fly.io, Heroku, Amazon ECS, Docker Cloud Run, DigitalOcean App Platform, et.c.
 
-with other supported mlflow backends for artifacts and database.
-Pull requests are welcome to fix any compatibility issues.
+Pull requests are welcome to fix compatibility issues.
+
+## Status
+
+**RARELY USED**. Not actively maintained!
+
+- Very infrequent updates.
+- Not really checking issues
 
 ## License
 [Licensed](./LICENSE.txt) under Apache 2.0, as mlflow itself.
 
-## Status
-
-**In Use**
 
 # Quickstart
 
