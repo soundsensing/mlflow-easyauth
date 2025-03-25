@@ -10,7 +10,7 @@ if [[ -z "${DATABASE_URL}" ]]; then
 fi
 
 # Fix naming convention mismatch between Heroku and mlflow
-DATABASE_URL=${DATABASE_URL//postgres:/postgresql:} 
+DATABASE_URL=${DATABASE_URL//^postgres:/^postgresql:}
 
 # Credentials for Google Cloud Storage
 if [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
